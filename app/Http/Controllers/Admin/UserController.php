@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -68,7 +69,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $activities = UserActivity::where('user_id', $user->id)
+            ->latest()
+            ->paginate(15);
+        return view('admin.users.show', compact('user', 'activities'));
     }
 
     /**

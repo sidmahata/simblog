@@ -38,6 +38,7 @@
                             <td><span class="badge bg-primary">{{ $user->getRoleNames()->first() ?? 'N/A' }}</span></td>
                             <td>{{ $user->created_at->format('d M Y') }}</td>
                             <td>
+                                <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-outline-primary">View</a>
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
 
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(this);">

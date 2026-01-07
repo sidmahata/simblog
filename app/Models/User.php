@@ -46,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //hsmany userActivities
+    public function userActivities()
+    {
+        return $this->hasMany(UserActivity::class);
+    }
 }
