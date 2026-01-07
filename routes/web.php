@@ -12,7 +12,7 @@ use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth','role:user|admin'])->group(function () {
+Route::middleware(['auth','role:user|admin', 'log.activity'])->group(function () {
     Route::get('/posts/create', [FrontendPostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [FrontendPostController::class, 'store'])->name('posts.store');
     
@@ -27,7 +27,7 @@ Route::middleware(['auth','role:user|admin'])->group(function () {
 });
 Route::get('/posts/{post}', [HomeController::class, 'show'])->name('posts.show');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'log.activity'])->group(function () {
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
     Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
