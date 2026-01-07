@@ -89,6 +89,9 @@ http://127.0.0.1:8000<br>
 
 
 🧪 Running Tests (Optional):<br>
+cp .env .env.testing<br>
+
+Change mysql db name in .env.testing and then run:
 php artisan test<br>
 
 
