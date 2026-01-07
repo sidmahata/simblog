@@ -30,6 +30,10 @@
                         >
                             Dashboard
                         </a>
+                       <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="btn btn-outline-light w-100" type="submit">Logout</button>
+                        </form>
                     @else
                         <a
                             href="{{ route('login') }}"

@@ -16,6 +16,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LoginResponse;
+use App\Http\Responses\LoginResponse as CustomLoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
     }
 
     /**
@@ -39,7 +41,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::redirectUserForTwoFactorAuthenticationUsing(RedirectIfTwoFactorAuthenticatable::class);
 
         Fortify::authenticateUsing(function (Request $request) {
-
+            
             $user = User::where('email', $request->email)->first();
 
             if (! $user || ! Hash::check($request->password, $user->password)) {
@@ -52,7 +54,7 @@ class FortifyServiceProvider extends ServiceProvider
             }
 
             // Normal user trying to login via /login
-            return $user->hasRole('admin') ? null : $user;
+            return $user->hasRole('user') ? $user : null;
         });
 
         RateLimiter::for('login', function (Request $request) {
