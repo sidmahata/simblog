@@ -43,12 +43,12 @@ Update the .env file with the following configuration:
 
 Database Configuration:
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3307
-DB_DATABASE=simblog
-DB_USERNAME=root
-DB_PASSWORD=
+DB_CONNECTION=mysql<br> 
+DB_HOST=127.0.0.1<br>
+DB_PORT=3307<br>
+DB_DATABASE=simblog<br>
+DB_USERNAME=root<br>
+DB_PASSWORD=<br>
 
 
 Google OAuth Configuration:
