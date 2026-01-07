@@ -26,7 +26,7 @@ Follow the steps below to run the project locally.
 ### 1️⃣ Clone the Repository
 
 
-git clone https://github.com/your-username/simblog.git
+git clone https://github.com/sidmahata/simblog.git
 cd simblog
 
 ---
