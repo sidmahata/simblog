@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
     public function create()
     {
         return view('frontend.posts.create');
@@ -27,5 +29,35 @@ class PostController extends Controller
         ]);
 
         return redirect()->route('home')->with('status', 'Post published!');
+    }
+
+    public function edit(Post $post)
+    {
+        $this->authorize('update', $post);
+        return view('frontend.posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $this->authorize('update', $post);
+
+        $request->validate([
+            'title'   => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $post->update([
+            'title'   => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('posts.show', $post)->with('status', 'Post updated successfully!');
+    }
+
+    public function destroy(Post $post)
+    {
+        $this->authorize('delete', $post);
+        $post->delete();
+        return redirect()->route('home')->with('status', 'Post deleted successfully!');
     }
 }

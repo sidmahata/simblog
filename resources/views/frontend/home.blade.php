@@ -3,7 +3,12 @@
 @section('title', 'Home')
 
 @section('content')
-<h2 class="mb-4">Latest Posts</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Latest Posts</h2>
+    <a href="{{ route('posts.create') }}" class="btn btn-primary">
+        Add New Post
+    </a>
+</div>
 
 @foreach($posts as $post)
     <div class="mb-4 pb-4 border-bottom">

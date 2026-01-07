@@ -11,14 +11,26 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/posts/{post}', [HomeController::class, 'show'])->name('posts.show');
 
 Route::middleware(['auth','role:user|admin'])->group(function () {
     Route::get('/posts/create', [FrontendPostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [FrontendPostController::class, 'store'])->name('posts.store');
+    
+    Route::middleware('can:update,post')->group(function () {
+        Route::get('/posts/{post}/edit', [FrontendPostController::class, 'edit'])->name('posts.edit');
+        Route::put('/posts/{post}', [FrontendPostController::class, 'update'])->name('posts.update');
+    });
+
+    Route::middleware('can:delete,post')->group(function () {
+        Route::delete('/posts/{post}', [FrontendPostController::class, 'destroy'])->name('posts.destroy');
+    });
 });
+Route::get('/posts/{post}', [HomeController::class, 'show'])->name('posts.show');
+
 Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 Route::middleware('guest')->group(function () {
