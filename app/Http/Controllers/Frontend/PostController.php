@@ -40,7 +40,7 @@ class PostController extends Controller
         return view('frontend.posts.edit', compact('post'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post, PostCacheService $cache)
     {
         $this->authorize('update', $post);
 
@@ -53,6 +53,9 @@ class PostController extends Controller
             'title'   => $request->title,
             'content' => $request->content,
         ]);
+
+        $cache->clearPostList();
+        $cache->clearPost($post);
 
         return redirect()->route('posts.show', $post)->with('status', 'Post updated successfully!');
     }
