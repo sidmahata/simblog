@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostCommentController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -20,7 +21,11 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::prefix('admin')->name('admin.')->group(function() {
             Route::resource('posts', PostController::class);
+            Route::resource('posts.comments', PostCommentController::class)
+                ->only(['store', 'update', 'destroy'])
+                ->shallow();
         });
+
     });
 
     

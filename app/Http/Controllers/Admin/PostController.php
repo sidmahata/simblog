@@ -60,7 +60,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load('author'); // eager load author
+        $post->load(['author', 'comments.author']); // eager load author
         return view('admin.posts.show', compact('post'));
     }
 
