@@ -8,7 +8,7 @@
         <h5>Edit User: {{ $user->name }}</h5>
     </div>
     <div class="card-body">
-        <form method="POST" action="{{ route('users.update', $user) }}">
+        <form method="POST" action="{{ route('admin.users.update', $user) }}">
             @csrf
             @method('PUT')
 
@@ -44,7 +44,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Update User</button>
-            <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

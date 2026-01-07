@@ -5,12 +5,12 @@
 @section('content')
 <div class="d-flex justify-content-between mb-3">
     <h4>Users</h4>
-    <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">Create New User</a>
+    <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">Create New User</a>
 </div>
 
 <div class="card shadow-sm">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <form method="GET" action="{{ route('users.index') }}" class="d-flex" role="search">
+        <form method="GET" action="{{ route('admin.users.index') }}" class="d-flex" role="search">
             <input type="text" name="search" value="{{ request('search') }}" class="form-control form-control-sm me-2" placeholder="Search users...">
             <button type="submit" class="btn btn-sm btn-primary">Search</button>
         </form>
@@ -38,9 +38,9 @@
                             <td><span class="badge bg-primary">{{ $user->getRoleNames()->first() ?? 'N/A' }}</span></td>
                             <td>{{ $user->created_at->format('d M Y') }}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
 
-                                <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(this);">
+                                <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(this);">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-outline-danger">Delete</button>
