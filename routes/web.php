@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home.alias');
 
 Route::middleware(['auth','role:user|admin', 'log.activity'])->group(function () {
     Route::get('/posts/create', [FrontendPostController::class, 'create'])->name('posts.create');
