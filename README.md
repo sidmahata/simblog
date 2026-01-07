@@ -53,54 +53,54 @@ DB_PASSWORD=<br>
 
 Google OAuth Configuration:
 
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback
+GOOGLE_CLIENT_ID=your_google_client_id<br>
+GOOGLE_CLIENT_SECRET=your_google_client_secret<br>
+GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback<br>
 
 
 Facebook OAuth Configuration:
 
-FACEBOOK_CLIENT_ID=your_facebook_client_id
-FACEBOOK_CLIENT_SECRET=your_facebook_client_secret
-FACEBOOK_REDIRECT_URI=http://127.0.0.1:8000/auth/facebook/callback
+FACEBOOK_CLIENT_ID=your_facebook_client_id<br>
+FACEBOOK_CLIENT_SECRET=your_facebook_client_secret<br>
+FACEBOOK_REDIRECT_URI=http://127.0.0.1:8000/auth/facebook/callback<br>
 
 
-4️⃣ Generate Application Key
+4️⃣ Generate Application Key:<br>
 php artisan key:generate
 
 
-5️⃣ Run Database Migrations & Seeders
-php artisan migrate:fresh
-php artisan db:seed
+5️⃣ Run Database Migrations & Seeders:<br>
+php artisan migrate:fresh<br>
+php artisan db:seed<br>
 
-6️⃣ Create Admin User
-php artisan app:create-admin
+6️⃣ Create Admin User:<br>
+php artisan app:create-admin<br>
 
-You will be prompted to enter:
-Name
-Email
-Password
+You will be prompted to enter:<br>
+Name<br>
+Email<br>
+Password<br>
 
-7️⃣ Start the Development Server
-php artisan serve
+7️⃣ Start the Development Server:<br>
+php artisan serve<br>
 
-Access the application at:
-http://127.0.0.1:8000
+Access the application at:<br>
+http://127.0.0.1:8000<br>
 
 
-🧪 Running Tests (Optional)
-php artisan test
+🧪 Running Tests (Optional):<br>
+php artisan test<br>
 
 
 🛠 Troubleshooting
 
-Database Connection Issues:
-Ensure MySQL is running
-Verify the database port (3307)
-Check database credentials in .env
+Database Connection Issues:<br>
+Ensure MySQL is running<br>
+Verify the database port (3307)<br>
+Check database credentials in .env<br>
 
-Social Login Not Working:
-Verify OAuth credentials
-Ensure redirect URIs match those configured in Google/Facebook developer consoles
+Social Login Not Working:<br>
+Verify OAuth credentials<br>
+Ensure redirect URIs match those configured in Google/Facebook developer consoles<br>
 
 
