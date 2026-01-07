@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
@@ -45,6 +46,15 @@ Route::middleware('guest')->group(function () {
 Route::prefix('admin')->middleware('guest')->group(function () {
     Route::get('/login', fn () => view('admin.auth.login'))->name('admin.login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('admin.login.store');
+});
+
+Route::middleware('guest')->group(function () {
+
+    Route::get('/auth/{provider}', [SocialAuthController::class, 'redirect'])
+        ->whereIn('provider', ['google', 'facebook']);
+
+    Route::get('/auth/{provider}/callback', [SocialAuthController::class, 'callback'])
+        ->whereIn('provider', ['google', 'facebook']);
 });
 
 Route::prefix('admin')

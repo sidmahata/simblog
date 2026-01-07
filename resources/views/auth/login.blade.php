@@ -55,6 +55,19 @@
                     </button>
                 </form>
 
+                <hr>
+
+                <div class="d-grid gap-2">
+                    <a href="{{ url('/auth/google') }}" class="btn btn-outline-danger">
+                        Continue with Google
+                    </a>
+
+                    <a href="{{ url('/auth/facebook') }}" class="btn btn-outline-primary">
+                        Continue with Facebook
+                    </a>
+                </div>
+
+
                 <div class="mt-3 text-center">
                     <a href="{{ route('password.request') }}">
                         Forgot your password?
