@@ -6,10 +6,20 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Frontend\CommentController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/posts/{post}', [HomeController::class, 'show'])->name('posts.show');
+
+Route::middleware(['auth','role:user|admin'])->group(function () {
+    Route::get('/posts/create', [FrontendPostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [FrontendPostController::class, 'store'])->name('posts.store');
+});
+Route::middleware('auth')->group(function () {
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', fn () => view('auth.login'))->name('login');
