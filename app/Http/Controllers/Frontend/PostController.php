@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Services\PostCacheService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -15,7 +16,7 @@ class PostController extends Controller
         return view('frontend.posts.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, PostCacheService $cache)
     {
         $request->validate([
             'title'   => 'required|string|max:255',
@@ -27,6 +28,8 @@ class PostController extends Controller
             'content' => $request->content,
             'user_id' => auth()->id(), // author
         ]);
+
+        $cache->clearPostList();
 
         return redirect()->route('home')->with('status', 'Post published!');
     }

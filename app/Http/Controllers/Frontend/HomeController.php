@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Services\PostCacheService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(PostCacheService $cache)
     {
-        $posts = Post::with('author')
-            ->latest()
-            ->paginate(10);
+
+        $posts = $cache->posts();
 
         return view('frontend.home', compact('posts'));
     }

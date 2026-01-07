@@ -2,6 +2,7 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    Laravel\Fortify\FortifyServiceProvider::class,
+    App\Providers\CacheServiceProvider::class,
     App\Providers\FortifyServiceProvider::class,
+    Laravel\Fortify\FortifyServiceProvider::class,
 ];
