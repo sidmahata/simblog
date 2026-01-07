@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -16,5 +17,11 @@ Route::group(['middleware' => 'auth'], function () {
     //middleware role:admin
     Route::group(['middleware' => 'role:admin'], function () {
         Route::resource('users', UserController::class);
+
+        Route::prefix('admin')->name('admin.')->group(function() {
+            Route::resource('posts', PostController::class);
+        });
     });
+
+    
 });

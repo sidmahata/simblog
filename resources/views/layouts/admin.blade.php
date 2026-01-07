@@ -73,6 +73,10 @@
                         Users
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.posts.index') }}" class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
+                        Posts
+                    </a>
             @endif
         </ul>
         <hr>
